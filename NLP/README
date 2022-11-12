@@ -1,0 +1,15 @@
+Env setup:
+X-RapidAPI-Key = [API KEY]
+
+Env example:
+X-RapidAPI-Key = 87933c6567msh251084223a165ycp171b5cjsn5r618b074c10
+
+
+Task 2 settings:
+N_EXAMPLES_TO_TRAIN = [Number of lines to be read] (each line is an example)
+EPOCHES = [number of epoches]
+LEARNING_RATE = [learning rate]
+
+Note:
+> To run the tests it is necessary to run every file directly (not using the run.py script)
+> To create an API-KEY for the task 2, it is necessary to have an account on https://rapidapi.com and subscribe to this API: https://rapidapi.com/gatzuma/api/deep-translate1/
