@@ -32,7 +32,7 @@ bleu_dt = []
 esp = []
 
 # open the text to be translated
-text = open("europarl1-v7.es-en.en", "r",encoding="utf-8")
+text = open("europarl-v7.es-en.en", "r",encoding="utf-8")
 text = text.readlines()
 
 # argos api function
@@ -77,7 +77,7 @@ def dt_translate(text):
 
 
 # open test dataset
-text2 = open("europarl1-v7.es-en.es", "r",encoding="utf-8")
+text2 = open("europarl-v7.es-en.es", "r",encoding="utf-8")
 text2 = text2.readlines()
 
 argos_translate(text)
