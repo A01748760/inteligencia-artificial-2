@@ -1,3 +1,11 @@
+'''
+Author: David Rodriguez Fragoso
+Script that trains an NLP model using a given dataset
+Creation date: 08/11/2022
+Last updated: 08/11/2022
+'''
+
+
 from flair.data import Corpus
 from flair.datasets import ColumnCorpus
 from flair.embeddings import WordEmbeddings, StackedEmbeddings, TokenEmbeddings
@@ -9,7 +17,7 @@ import matplotlib.pyplot as plt
 
 
 N_EXAMPLES_TO_TRAIN = 500
-EPOCHES = 15
+EPOCHES = 10
 LEARNING_RATE = 0.05
 
 train = []
@@ -61,10 +69,10 @@ trainer.train('resources/taggers/example-ner',
               learning_rate=LEARNING_RATE,
               mini_batch_size=32,
               max_epochs=EPOCHES)
-print(tagger)
 
-loss_data = pd.read_csv('resources/taggers/example-ner/loss.tsv', sep='\t')
-print(loss_data)
-plt.plot(loss_data["EPOCH"],loss_data["TRAIN_LOSS"],'b-.')
-plt.plot(loss_data["EPOCH"],loss_data["DEV_LOSS"],'r--')
-plt.show()
+def plot():
+        loss_data = pd.read_csv('resources/taggers/example-ner/loss.tsv', sep='\t')
+
+        plt.plot(loss_data["EPOCH"],loss_data["TRAIN_LOSS"],'b-.')
+        plt.plot(loss_data["EPOCH"],loss_data["DEV_LOSS"],'r--')
+        plt.show()

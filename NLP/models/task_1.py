@@ -56,3 +56,9 @@ def analyze(process):
       print(i['label'])
 
 analyze(process)
+
+
+if __name__ == '__main__':
+  print("--------------------TESTS--------------------")
+  process = ["I love doing tests", "I hate apples"]
+  analyze(process)
