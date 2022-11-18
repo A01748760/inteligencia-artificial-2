@@ -5,6 +5,26 @@ Creation date: 10/11/2022
 Last updated: 11/11/2022
 '''
 
+"""
+
+I would make this into a Translate class which has methods like the ones you have below -- it will help your code be clean and organized! 
+Examples: https://www.dataquest.io/blog/using-classes-in-python/ and https://www.geeksforgeeks.org/python-classes-and-objects/
+
+
+
+And be sure to add tests for all pieces of functionality! 
+
+Tests should check that the functionality/outputs are as expected, not just that the code runs! 
+
+When writing code, I write the test for each class or piece of functionality as soon as I finish that piece.
+It helps you develop incrementally, being sure that each piece of code is clean and works like you expect it to! 
+
+
+for tests, best practices are to have a structure like this: 
+https://stackoverflow.com/questions/1896918/running-unittest-with-typical-test-directory-structure
+
+"""
+
 
 import json
 import requests
@@ -84,7 +104,7 @@ argos_translate(text)
 dt_translate(text)
 
 # calculate average bleu for argos api
-for i in text2:
+for i in text2:  # name this text rather than i 
     bleu_argos.append(sentence_bleu(argos_api, i))
 bleu_argos = sum(bleu_argos)/len(bleu_argos)
 
