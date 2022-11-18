@@ -5,6 +5,17 @@ Creation date: 08/11/2022
 Last updated: 08/11/2022
 '''
 
+"""
+
+It’s best practice to have your code in a descriptive method or small class, if possible, rather than running at the top-level. 
+This makes it easier for other modules to import the functionality later if needed! 
+
+
+Try to split your code into methods and classes with descriptive names! Some reading for this: 
+
+Classes: https://www.dataquest.io/blog/using-classes-in-python/ and https://www.geeksforgeeks.org/python-classes-and-objects/
+# Classes: https://www.dataquest.io/blog/using-classes-in-python/
+"""
 
 from flair.data import Corpus
 from flair.datasets import ColumnCorpus
