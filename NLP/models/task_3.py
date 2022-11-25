@@ -5,43 +5,24 @@ Creation date: 10/11/2022
 Last updated: 11/11/2022
 '''
 
-
-import json
-import requests
 from nltk.translate.bleu_score import sentence_bleu
-import dotenv
-import os
-
-from dotenv import load_dotenv
-
-load_dotenv()
-
-# api url's
-url1 = 'https://translate.argosopentech.com/translate'
-url2 = 'https://deep-translate1.p.rapidapi.com/language/translate/v2'
-
-# translation results
-argos_api = []
-dt_api = []
-
-# bleu for both api's
-bleu_argos = []
-bleu_dt = []
-
-# test text
-esp = []
+from Classes.Translate import Translate
 
 # open the text to be translated
-text = open("europarl-v7.es-en.en", "r",encoding="utf-8")
+text = open("../europarl-v7.es-en.en", "r",encoding="utf-8")
 text = text.readlines()
 
+# open test dataset
+text2 = open("../europarl-v7.es-en.es", "r",encoding="utf-8")
+text2 = text2.readlines()
+'''
 # argos api function
 def argos_translate(text):
 
-    for i in text:
+    for example in text:
         # body for argos api request
         body = {
-            "q": i,
+            "q": example,
             "source": "en",
             "target": "es"
         }
@@ -55,10 +36,10 @@ def argos_translate(text):
 
 # deep translate api function
 def dt_translate(text):
-    for i in text:
+    for example in text:
         # body for google api request
         payload = {
-            "q": i,
+            "q": example,
             "source": "en",
             "target": "es"
         }
@@ -75,29 +56,22 @@ def dt_translate(text):
 
     return dt_api
 
+'''
 
-# open test dataset
-text2 = open("europarl-v7.es-en.es", "r",encoding="utf-8")
-text2 = text2.readlines()
 
-argos_translate(text)
-dt_translate(text)
+#Save the translation results
+argos_translate = Translate.argos_translate(text)
+dt_translate = Translate.dt_translate(text)
 
-# calculate average bleu for argos api
-for i in text2:
-    bleu_argos.append(sentence_bleu(argos_api, i))
-bleu_argos = sum(bleu_argos)/len(bleu_argos)
-
-# calculate average bleu for google api
-for i in text2:
-    bleu_dt.append(sentence_bleu(dt_api, i))
-bleu_google = sum(bleu_dt)/len(bleu_dt)
+# calculate average bleu for google api and the argos api
+bleu_argos = Translate.obtainBLEU(argos_translate)
+bleu_dt = Translate.obtainBLEU(dt_translate)
 
 
 print(f"ARGOS_API: {bleu_argos}")
-print(f"DeepTranslate_API: {bleu_google}")
+print(f"DeepTranslate_API: {bleu_dt}")
 
-if __name__ == '__main__':
+'''if __name__ == '__main__':
     print("--------------------TESTS--------------------")
     test = ["Hi this is a test", "I like apples"]
     test2 = ["Hola esto es un test", "Me gustan las manzanas"]
@@ -107,15 +81,15 @@ if __name__ == '__main__':
     bleu_dt = []
 
     # calculate average bleu for argos api
-    for i in test2:
+    for text in test2:
         bleu_argos.append(sentence_bleu(argos_api, i))
     bleu_argos = sum(bleu_argos)/len(bleu_argos)
 
     # calculate average bleu for google api
-    for i in test2:
+    for text in test2:
         bleu_dt.append(sentence_bleu(dt_api, i))
     bleu_google = sum(bleu_dt)/len(bleu_dt)
 
 
     print(f"ARGOS_API: {bleu_argos}")
-    print(f"DeepTranslate_API: {bleu_google}")
+    print(f"DeepTranslate_API: {bleu_google}")'''

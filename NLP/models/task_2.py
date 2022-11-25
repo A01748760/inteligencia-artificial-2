@@ -22,19 +22,19 @@ LEARNING_RATE = 0.05
 
 train = []
 
-with open("train.txt") as myfile:
-        for x in range(N_EXAMPLES_TO_TRAIN):
+with open("../train.txt") as myfile:
+        for N in range(N_EXAMPLES_TO_TRAIN):
                 train.append(next(myfile))
 
 # create the new test file
-f = open("train1.txt", "w")
-f.writelines(train)
-f.close()
+test_file = open("../train1.txt", "w")
+test_file.writelines(train)
+test_file.close()
 
 # define columns
 columns = {0 : 'text', 1 : 'ner'}
 # directory where the data resides
-data_folder = './'
+data_folder = '../'
 # initializing the corpus
 
 
