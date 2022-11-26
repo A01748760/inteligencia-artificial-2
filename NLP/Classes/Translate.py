@@ -1,23 +1,24 @@
-'''
+"""
 Author: David Rodriguez Fragoso
 Class with methods to translate text using apis and obtain the BLEU
 Creation date: 24/11/2022
 Last updated: 24/11/2022
-'''
+"""
 import json
 import requests
 from nltk.translate.bleu_score import sentence_bleu
 
 import os
 
-class Translate():
 
-    def __init__(self,text) -> None:
+class Translate:
+
+    def __init__(self, text) -> None:
         self.text = text
     
     def argos(self):
         """
-            Class method that translates text using the argos api
+            Method that translates text using the argos api
 
             Parameters:
             * text: text to be translated
@@ -25,9 +26,9 @@ class Translate():
             Returns:
             * An array with the translated text
         """
-        #api url
+        # api url
         url = 'https://translate.argosopentech.com/translate'
-        #translation result
+        # translation result
         argos_api = []
         for example in self.text:
             # body for argos api request
@@ -43,10 +44,9 @@ class Translate():
             argos_api.append(res1["translatedText"][:-1])
         return argos_api
 
-
     def deepTranslate(self):
         """
-            Class method that translates text using the deepTranslate api
+            Method that translates text using the deepTranslate api
 
             Parameters:
             * text: text to be translated
@@ -55,7 +55,7 @@ class Translate():
             * An array with the translated text
         """
         url = 'https://deep-translate1.p.rapidapi.com/language/translate/v2'
-        #translation result
+        # translation result
         dt_api = []
 
         for example in self.text:
@@ -77,11 +77,20 @@ class Translate():
             dt_api.append(res2['data']['translations']['translatedText'])
 
             return dt_api
-        
-    @classmethod
-    def obtainBLEU(self):
+
+    @staticmethod
+    def obtainBLEU(translation, test):
+        """
+            Class method that translates text using the deepTranslate api
+
+            Parameters:
+            * text: text to be translated
+
+            Returns:
+            * An array with the translated text
+        """
         bleu = []
-        for line in self.text:
-            bleu.append(sentence_bleu(self.text, line))
+        for example in test:
+            bleu.append(sentence_bleu(translation, example))
         
         return sum(bleu)/len(bleu)

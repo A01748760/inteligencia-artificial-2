@@ -1,64 +1,29 @@
-'''
+"""
 Author: David Rodriguez Fragoso
-Script that tests a sentiment analisis model using a given dataset
+Script that tests a sentiment analysis model using a given dataset
 Creation date: 07/11/2022
-Last updated: 07/11/2022
-'''
+Last updated: 25/11/2022
+"""
+import string
 
-from transformers import pipeline
+from Classes.SentimentAnalyzer import SentimentAnalyzer
 
-# open the .txt and append each line into a list
+# open the .txt and save each example in separate lines
 text = open("../tiny_movie_reviews_dataset.txt", "r")
-input = text.readlines()
+text = text.readlines()
 
-# create an empty list to save our preprocessed text
-process = []
+# remove the punctuation signs from the text and save it
+new_text = [character.translate(str.maketrans('', '', string.punctuation)) for character in text]
 
-# remove the punctuation signs from the text 
-for character in input:
-  character = character.replace("#","")
-  character = character.replace(".","")
-  character = character.replace("!","")
-  character = character.replace('"',"")
-  character = character.replace("$","")
-  character = character.replace("%","")
-  character = character.replace("&","")
-  character = character.replace("'","")
-  character = character.replace("()","")
-  character = character.replace("*","")
-  character = character.replace("+","")
-  character = character.replace(",","")
-  character = character.replace("-","")
-  character = character.replace("/","")
-  character = character.replace(":","")
-  character = character.replace(";","")
-  character = character.replace("<","")
-  character = character.replace("=","")
-  character = character.replace(">","")
-  character = character.replace("?","")
-  character = character.replace("@","")
-  character = character.replace("[","")
-  character = character.replace("\\","")
-  character = character.replace("]","")
-  character = character.replace("^","")
-  character = character.replace("_","")
-  character = character.replace("`","")
-  character = character.replace("{","")
-  character = character.replace("}","")
-  character = character.replace("|","")
-  character = character.replace("~","")
-  process.append(character)
+# Create the analyzer instance
+analyzer = SentimentAnalyzer(new_text)
 
-# analyze our preprocessed text and print the result
-def analyze(process):
-    sentiment_pipeline = pipeline("sentiment-analysis")
-    for example in sentiment_pipeline(process):
-      print(example['label'])
-
-analyze(process)
+# Call the analyze method
+analyzer.analyze()
 
 
-if __name__ == '__main__':
-  print("--------------------TESTS--------------------")
-  process = ["I love doing tests", "I hate apples"]
-  analyze(process)
+'''if __name__ == '__main__':
+    print("--------------------TESTS--------------------")
+    process = ["I love doing tests", "I hate apples"]
+    analyze(process)
+'''
