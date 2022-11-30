@@ -48,6 +48,16 @@ class NERModel:
                                                      allow_unk_predictions=True)
         self.trainer: ModelTrainer = ModelTrainer(self.tagger, self.corpus)
 
+    @staticmethod
+    def downsample(n_examples):
+        # Array with the train data
+        train = []
+        # We save the train data
+        with open("../train.txt") as myfile:
+            for N in range(n_examples):
+                train.append(next(myfile))
+        return train
+
     def trainModel(self):
         """
             Method that trains the model

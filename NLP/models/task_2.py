@@ -21,14 +21,9 @@ dev_file = 'dev.txt'
 # Directory where the data resides
 data_folder = '../'
 
-# Array with the train data
-train = []
 
-# We save the train data
-with open("../train.txt") as myfile:
-    for N in range(N_EXAMPLES_TO_TRAIN):
-        train.append(next(myfile))
-
+train = NERModel.downsample(N_EXAMPLES_TO_TRAIN)
+print(len(train))
 # Create the new test file
 test_file = open("../train1.txt", "w")
 test_file.writelines(train)

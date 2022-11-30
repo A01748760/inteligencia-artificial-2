@@ -23,7 +23,10 @@ class SentimentAnalyzer:
             * Prints the detected emotions in the console
 
         """
+        sentiments = []
         sentiment_pipeline = pipeline("sentiment-analysis")
         for example in sentiment_pipeline(self.text):
             print(example['label'])
-    
+            sentiments.append(example['label'])
+
+        return sentiments
