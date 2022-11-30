@@ -11,7 +11,7 @@ from nltk.translate.bleu_score import sentence_bleu
 import os
 
 
-class Translate:
+class Translator:
 
     def __init__(self, text) -> None:
         self.text = text

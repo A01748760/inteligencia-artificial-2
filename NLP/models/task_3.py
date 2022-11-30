@@ -5,8 +5,7 @@ Creation date: 10/11/2022
 Last updated: 11/11/2022
 """
 
-from nltk.translate.bleu_score import sentence_bleu
-from Classes.Translate import Translate
+from Classes.Translator import Translator
 
 # open the text to be translated
 text = open("../europarl-v7.es-en.en", "r", encoding="utf-8")
@@ -17,15 +16,15 @@ text2 = open("../europarl-v7.es-en.es", "r", encoding="utf-8")
 text2 = text2.readlines()
 
 # Create the Translate class instance
-translator = Translate(text)
+translator = Translator(text)
 
 # Save the translated text
-argos_translate = Translate.argos(translator)
-dt_translate = Translate.deepTranslate(translator)
+argos_translate = Translator.argos(translator)
+dt_translate = Translator.deepTranslate(translator)
 
 # calculate average bleu for google api and the argos api
-bleu_argos = Translate.obtainBLEU(argos_translate, text2)
-bleu_dt = Translate.obtainBLEU(dt_translate, text2)
+bleu_argos = Translator.obtainBLEU(argos_translate, text2)
+bleu_dt = Translator.obtainBLEU(dt_translate, text2)
 
 
 print(f"ARGOS_API: {bleu_argos}")
